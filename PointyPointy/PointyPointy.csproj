@@ -181,6 +181,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InviteController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -254,7 +255,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -279,6 +279,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Invite\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -287,6 +288,10 @@
     <ProjectReference Include="..\CodePeace.Common\CodePeace.Common.csproj">
       <Project>{1c036c34-63d5-43b5-9bf6-b87773abce42}</Project>
       <Name>CodePeace.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PointyPointy.Services\PointyPointy.Services.csproj">
+      <Project>{49e3f9d3-7ee7-4d61-8180-cd8c2e8ec731}</Project>
+      <Name>PointyPointy.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

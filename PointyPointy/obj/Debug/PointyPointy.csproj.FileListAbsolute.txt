@@ -63,3 +63,5 @@ D:\Projects\PointyPointy\PointyPointy\bin\Microsoft.AspNet.SignalR.Core.dll
 D:\Projects\PointyPointy\PointyPointy\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 D:\Projects\PointyPointy\PointyPointy\bin\Microsoft.AspNet.SignalR.Core.xml
 D:\Projects\PointyPointy\PointyPointy\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.Services.dll
+D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.Services.pdb
