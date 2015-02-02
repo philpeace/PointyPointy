@@ -65,28 +65,15 @@ namespace PointyPointy.Data
             _context.SaveChanges();
         }
 
-        [ExcludeFromCodeCoverage]
         IEnumerable<T> IRepository<T>.Fetch(Expression<Func<T, bool>> predicate)
         {
             return Fetch(predicate);
         }
-        [ExcludeFromCodeCoverage]
+        
         IEnumerable<T> IRepository<T>.Fetch(Expression<Func<T, bool>> predicate, params string[] includes)
         {
-            return Fetch(predicate,includes);
+            return Fetch(predicate, includes);
         }
-
-        //[ExcludeFromCodeCoverage]
-        //IEnumerable<T> IRepository<T>.Fetch(Expression<Func<T, bool>> predicate, Action<Orderable<T>> order)
-        //{
-        //    return Fetch(predicate, order);
-        //}
-
-        //[ExcludeFromCodeCoverage]
-        //IEnumerable<T> IRepository<T>.Fetch(Expression<Func<T, bool>> predicate, Action<Orderable<T>> order, int skip, int count)
-        //{
-        //    return Fetch(predicate, order, skip, count);
-        //}
         
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
@@ -109,20 +96,6 @@ namespace PointyPointy.Data
         {
             return Table.Where(predicate);
         }
-
-        //public virtual IQueryable<T> Fetch(Expression<Func<T, bool>> predicate, Action<Orderable<T>> order)
-        //{
-        //    var orderable = new Orderable<T>(Fetch(predicate));
-        //    order(orderable);
-
-        //    return orderable.Queryable;
-        //}
-
-        //public virtual IQueryable<T> Fetch(Expression<Func<T, bool>> predicate, Action<Orderable<T>> order, int skip,
-        //                                   int count)
-        //{
-        //    return Fetch(predicate, order).Skip(skip).Take(count);
-        //}
 
         public bool Exists(Expression<Func<T, bool>> predicate)
         {
