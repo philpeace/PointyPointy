@@ -8,3 +8,7 @@ D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.x
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csprojResolveAssemblyReference.cache
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.dll
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.pdb
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.xml
