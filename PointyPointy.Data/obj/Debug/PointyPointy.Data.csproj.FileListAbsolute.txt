@@ -1,0 +1,10 @@
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll.config
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.pdb
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.xml
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.xml
+D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csprojResolveAssemblyReference.cache
+D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.dll
+D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb
