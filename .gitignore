@@ -183,6 +183,5 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
-bin/
-Auth.config
+PointyPointy/Config/Auth.config
 
