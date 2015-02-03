@@ -14,6 +14,8 @@ namespace PointyPointy.Controllers
     [Authorize]
     public class ManageController : Controller
     {
+        private readonly IApplicationSignInManagerFactory _applicationSignInManagerFactory;
+        private readonly IApplicationUserManagerFactory _applicationUserManagerFactory;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -21,11 +23,20 @@ namespace PointyPointy.Controllers
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(IApplicationSignInManagerFactory applicationSignInManagerFactory, IApplicationUserManagerFactory applicationUserManagerFactory)
         {
-            UserManager = userManager;
-            SignInManager = signInManager;
+            _applicationSignInManagerFactory = applicationSignInManagerFactory;
+            _applicationUserManagerFactory = applicationUserManagerFactory;
+
+            _signInManager = _applicationSignInManagerFactory.Create();
+            _userManager = _applicationUserManagerFactory.Create();
         }
+
+        //public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        //{
+        //    UserManager = userManager;
+        //    SignInManager = signInManager;
+        //}
 
         public ApplicationSignInManager SignInManager
         {
@@ -33,11 +44,11 @@ namespace PointyPointy.Controllers
             private set { _signInManager = value; }
         }
 
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
+        //public ApplicationUserManager UserManager
+        //{
+        //    get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        //    private set { _userManager = value; }
+        //}
 
         //
         // GET: /Manage/Index
@@ -56,9 +67,9 @@ namespace PointyPointy.Controllers
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
-                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
-                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
-                Logins = await UserManager.GetLoginsAsync(userId),
+                PhoneNumber = await _userManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await _userManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await _userManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
@@ -71,13 +82,13 @@ namespace PointyPointy.Controllers
         public async Task<ActionResult> RemoveLogin(string loginProvider, string providerKey)
         {
             ManageMessageId? message;
-            IdentityResult result = await UserManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
+            IdentityResult result = await _userManager.RemoveLoginAsync(User.Identity.GetUserId(), new UserLoginInfo(loginProvider, providerKey));
             if (result.Succeeded)
             {
-                ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, false, false);
+                    await _signInManager.SignInAsync(user, false, false);
                 }
                 message = ManageMessageId.RemoveLoginSuccess;
             }
@@ -106,15 +117,15 @@ namespace PointyPointy.Controllers
                 return View(model);
             }
             // Generate the token and send it
-            string code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
-            if (UserManager.SmsService != null)
+            string code = await _userManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), model.Number);
+            if (_userManager.SmsService != null)
             {
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
                     Body = "Your security code is: " + code
                 };
-                await UserManager.SmsService.SendAsync(message);
+                await _userManager.SmsService.SendAsync(message);
             }
             return RedirectToAction("VerifyPhoneNumber", new {PhoneNumber = model.Number});
         }
@@ -125,11 +136,11 @@ namespace PointyPointy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> EnableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            await _userManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), true);
+            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
-                await SignInManager.SignInAsync(user, false, false);
+                await _signInManager.SignInAsync(user, false, false);
             }
             return RedirectToAction("Index", "Manage");
         }
@@ -140,11 +151,11 @@ namespace PointyPointy.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DisableTwoFactorAuthentication()
         {
-            await UserManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            await _userManager.SetTwoFactorEnabledAsync(User.Identity.GetUserId(), false);
+            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
-                await SignInManager.SignInAsync(user, false, false);
+                await _signInManager.SignInAsync(user, false, false);
             }
             return RedirectToAction("Index", "Manage");
         }
@@ -153,7 +164,7 @@ namespace PointyPointy.Controllers
         // GET: /Manage/VerifyPhoneNumber
         public async Task<ActionResult> VerifyPhoneNumber(string phoneNumber)
         {
-            string code = await UserManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
+            string code = await _userManager.GenerateChangePhoneNumberTokenAsync(User.Identity.GetUserId(), phoneNumber);
             // Send an SMS through the SMS provider to verify the phone number
             return phoneNumber == null ? View("Error") : View(new VerifyPhoneNumberViewModel {PhoneNumber = phoneNumber});
         }
@@ -168,13 +179,13 @@ namespace PointyPointy.Controllers
             {
                 return View(model);
             }
-            IdentityResult result = await UserManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
+            IdentityResult result = await _userManager.ChangePhoneNumberAsync(User.Identity.GetUserId(), model.PhoneNumber, model.Code);
             if (result.Succeeded)
             {
-                ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, false, false);
+                    await _signInManager.SignInAsync(user, false, false);
                 }
                 return RedirectToAction("Index", new {Message = ManageMessageId.AddPhoneSuccess});
             }
@@ -187,15 +198,15 @@ namespace PointyPointy.Controllers
         // GET: /Manage/RemovePhoneNumber
         public async Task<ActionResult> RemovePhoneNumber()
         {
-            IdentityResult result = await UserManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
+            IdentityResult result = await _userManager.SetPhoneNumberAsync(User.Identity.GetUserId(), null);
             if (!result.Succeeded)
             {
                 return RedirectToAction("Index", new {Message = ManageMessageId.Error});
             }
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
             if (user != null)
             {
-                await SignInManager.SignInAsync(user, false, false);
+                await _signInManager.SignInAsync(user, false, false);
             }
             return RedirectToAction("Index", new {Message = ManageMessageId.RemovePhoneSuccess});
         }
@@ -217,13 +228,13 @@ namespace PointyPointy.Controllers
             {
                 return View(model);
             }
-            IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
+            IdentityResult result = await _userManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
             if (result.Succeeded)
             {
-                ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
                 if (user != null)
                 {
-                    await SignInManager.SignInAsync(user, false, false);
+                    await _signInManager.SignInAsync(user, false, false);
                 }
                 return RedirectToAction("Index", new {Message = ManageMessageId.ChangePasswordSuccess});
             }
@@ -246,13 +257,13 @@ namespace PointyPointy.Controllers
         {
             if (ModelState.IsValid)
             {
-                IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
+                IdentityResult result = await _userManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
                 if (result.Succeeded)
                 {
-                    ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                    ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
                     if (user != null)
                     {
-                        await SignInManager.SignInAsync(user, false, false);
+                        await _signInManager.SignInAsync(user, false, false);
                     }
                     return RedirectToAction("Index", new {Message = ManageMessageId.SetPasswordSuccess});
                 }
@@ -272,14 +283,14 @@ namespace PointyPointy.Controllers
                     : message == ManageMessageId.Error ? "An error has occurred."
                         : "";
 
-            ApplicationUser user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            ApplicationUser user = await _userManager.FindByIdAsync(User.Identity.GetUserId());
 
             if (user == null)
             {
                 return View("Error");
             }
 
-            IList<UserLoginInfo> userLogins = await UserManager.GetLoginsAsync(User.Identity.GetUserId());
+            IList<UserLoginInfo> userLogins = await _userManager.GetLoginsAsync(User.Identity.GetUserId());
             List<AuthenticationDescription> otherLogins = AuthenticationManager.GetExternalAuthenticationTypes().Where(auth => userLogins.All(ul => auth.AuthenticationType != ul.LoginProvider)).ToList();
             ViewBag.ShowRemoveButton = user.PasswordHash != null || userLogins.Count > 1;
 
@@ -310,7 +321,7 @@ namespace PointyPointy.Controllers
             {
                 return RedirectToAction("ManageLogins", new {Message = ManageMessageId.Error});
             }
-            IdentityResult result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
+            IdentityResult result = await _userManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new {Message = ManageMessageId.Error});
         }
 
@@ -356,7 +367,7 @@ namespace PointyPointy.Controllers
 
         private bool HasPassword()
         {
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 return user.PasswordHash != null;
@@ -366,7 +377,7 @@ namespace PointyPointy.Controllers
 
         private bool HasPhoneNumber()
         {
-            ApplicationUser user = UserManager.FindById(User.Identity.GetUserId());
+            ApplicationUser user = _userManager.FindById(User.Identity.GetUserId());
             if (user != null)
             {
                 return user.PhoneNumber != null;

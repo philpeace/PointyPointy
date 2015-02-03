@@ -204,8 +204,12 @@
     <Compile Include="Models\VerifyPhoneNumberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ApplicationSignInManager.cs" />
+    <Compile Include="Services\ApplicationSignInManagerFactory.cs" />
     <Compile Include="Services\ApplicationUserManager.cs" />
+    <Compile Include="Services\ApplicationUserManagerFactory.cs" />
     <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\IApplicationSignInManagerFactory.cs" />
+    <Compile Include="Services\IApplicationUserManagerFactory.cs" />
     <Compile Include="Services\SmsService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

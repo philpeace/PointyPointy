@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Autofac;
 using Autofac.Integration.Mvc;
 using CodePeace.Common;
+using CodePeace.Common.Web;
 
 namespace PointyPointy
 {
@@ -15,6 +16,7 @@ namespace PointyPointy
 
             builder.RegisterModule<AutofacWebTypesModule>();
             builder.RegisterType<ExtensibleActionInvoker>().As<IActionInvoker>();
+            builder.RegisterType<HttpContextAccessor>().As<IHttpContextAccessor>().SingleInstance();
 
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t => typeof (IDependency).IsAssignableFrom(t))
