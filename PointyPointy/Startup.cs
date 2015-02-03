@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using PointyPointy;
 
-[assembly: OwinStartupAttribute(typeof(PointyPointy.Startup))]
+[assembly: OwinStartup(typeof (Startup))]
+
 namespace PointyPointy
 {
     public partial class Startup

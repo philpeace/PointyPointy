@@ -12,3 +12,17 @@ D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.dll
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.dll
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.pdb
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.xml
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll.config
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.pdb
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\CodePeace.Common.pdb
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\Autofac.xml
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.xml
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.xml
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csprojResolveAssemblyReference.cache
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.dll
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb

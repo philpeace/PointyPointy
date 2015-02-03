@@ -1,27 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Data.Entity;
 
 namespace PointyPointy.Data
 {
-    public class EFRepository<T> : IRepository<T> where T : class
+    public class GenericRepository<T> : IRepository<T> where T : class
     {
         private readonly IDbContext _context;
 
-        public EFRepository(IDbContext context)
+        public GenericRepository(IDbContext context)
         {
             _context = context;
         }
 
         protected IDbSet<T> Entities
         {
-            get
-            {
-                return _context.Set<T>();
-            }
+            get { return _context.Set<T>(); }
         }
 
         public virtual T Get(int id)
@@ -31,10 +27,7 @@ namespace PointyPointy.Data
 
         public virtual IQueryable<T> Table
         {
-            get
-            {
-                return Entities.AsQueryable();
-            }
+            get { return Entities.AsQueryable(); }
         }
 
         public IQueryable<T> TableIncluding(params string[] includes)
@@ -69,22 +62,27 @@ namespace PointyPointy.Data
         {
             return Fetch(predicate);
         }
-        
+
         IEnumerable<T> IRepository<T>.Fetch(Expression<Func<T, bool>> predicate, params string[] includes)
         {
             return Fetch(predicate, includes);
         }
-        
+
         public virtual T Get(Expression<Func<T, bool>> predicate)
         {
             return Fetch(predicate).SingleOrDefault();
         }
 
+        public bool Exists(Expression<Func<T, bool>> predicate)
+        {
+            return Table.Any(predicate);
+        }
+
         public virtual IQueryable<T> Fetch(Expression<Func<T, bool>> predicate, string[] includes)
         {
-            var set = Fetch(predicate);
+            IQueryable<T> set = Fetch(predicate);
 
-            foreach (var includeExpression in includes)
+            foreach (string includeExpression in includes)
             {
                 set = set.Include(includeExpression);
             }
@@ -95,11 +93,6 @@ namespace PointyPointy.Data
         public virtual IQueryable<T> Fetch(Expression<Func<T, bool>> predicate)
         {
             return Table.Where(predicate);
-        }
-
-        public bool Exists(Expression<Func<T, bool>> predicate)
-        {
-            return Table.Any(predicate);
         }
     }
 }

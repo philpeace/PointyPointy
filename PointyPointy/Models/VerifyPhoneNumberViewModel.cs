@@ -1,7 +1,4 @@
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
 
 namespace PointyPointy.Models
 {
@@ -10,7 +7,7 @@ namespace PointyPointy.Models
         [Required]
         [Display(Name = "Code")]
         public string Code { get; set; }
-    
+
         [Required]
         [Phone]
         [Display(Name = "Phone Number")]

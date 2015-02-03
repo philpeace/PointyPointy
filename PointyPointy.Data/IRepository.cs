@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -8,20 +7,17 @@ namespace PointyPointy.Data
 {
     public interface IRepository<T> where T : class
     {
+        IQueryable<T> Table { get; }
+
         T Create(T entity);
-        
+
         T Update(T entity);
-       
+
         void Delete(T entity);
 
         T Get(int id);
-        
-        T Get(Expression<Func<T, bool>> predicate);
 
-        IQueryable<T> Table
-        {
-            get;
-        }
+        T Get(Expression<Func<T, bool>> predicate);
 
         IQueryable<T> TableIncluding(params string[] includes);
 

@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,15 +53,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Contexts\IPointyContext.cs" />
     <Compile Include="Contexts\PointyContext.cs" />
     <Compile Include="DataAccess\DAO.cs" />
     <Compile Include="DataAccess\IDAO.cs" />
     <Compile Include="DataAccess\IDAOContext.cs" />
     <Compile Include="DataAccess\ILifeTimeScope.cs" />
     <Compile Include="DataAccess\LifeTimeScope.cs" />
-    <Compile Include="EFRepository.cs" />
+    <Compile Include="Entities\ScrumInviteUser.cs" />
+    <Compile Include="GenericRepository.cs" />
+    <Compile Include="Entities\ScrumInvite.cs" />
     <Compile Include="IDBContext.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="PointyInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

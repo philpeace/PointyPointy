@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using PointyPointy.Models;
+using PointyPointy.Services;
 
 namespace PointyPointy
 {
@@ -31,11 +32,9 @@ namespace PointyPointy
                 {
                     // Enables the application to validate the security stamp when the user logs in.
                     // This is a security feature which is used when you change a password or add an external login to your account.  
-                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(
-                        validateInterval: TimeSpan.FromMinutes(30),
-                        regenerateIdentity: (manager, user) => user.GenerateUserIdentityAsync(manager))
+                    OnValidateIdentity = SecurityStampValidator.OnValidateIdentity<ApplicationUserManager, ApplicationUser>(TimeSpan.FromMinutes(30), (manager, user) => user.GenerateUserIdentityAsync(manager))
                 }
-            });            
+            });
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
 
             // Enables the application to temporarily store user information when they are verifying the second factor in the two-factor authentication process.
@@ -59,10 +58,10 @@ namespace PointyPointy
             //   appId: "",
             //   appSecret: "");
 
-            var googleClientId = ConfigurationManager.AppSettings["auth.google.clientid"];
-            var googleClientSecret = ConfigurationManager.AppSettings["auth.google.clientsecret"];
+            string googleClientId = ConfigurationManager.AppSettings["auth.google.clientid"];
+            string googleClientSecret = ConfigurationManager.AppSettings["auth.google.clientsecret"];
 
-            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions
             {
                 ClientId = googleClientId,
                 ClientSecret = googleClientSecret
