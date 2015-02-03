@@ -17,27 +17,29 @@ namespace PointyPointy.Controllers
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IApplicationSignInManagerFactory applicationSignInManagerFactory, IApplicationUserManagerFactory applicationUserManagerFactory)
         {
+            _signInManager = applicationSignInManagerFactory.Create();
+            _userManager = applicationUserManagerFactory.Create();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
+        //public AccountController(ApplicationUserManager userManager, ApplicationSignInManager _signInManager)
+        //{
+        //    UserManager = userManager;
+        //    _signInManager = _signInManager;
+        //}
 
-        public ApplicationSignInManager SignInManager
-        {
-            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
-            private set { _signInManager = value; }
-        }
+        //public ApplicationSignInManager _signInManager
+        //{
+        //    get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
+        //    private set { _signInManager = value; }
+        //}
 
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
+        //public ApplicationUserManager UserManager
+        //{
+        //    get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
+        //    private set { _userManager = value; }
+        //}
 
         //
         // GET: /Account/Login
@@ -62,7 +64,7 @@ namespace PointyPointy.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            SignInStatus result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            SignInStatus result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -84,7 +86,7 @@ namespace PointyPointy.Controllers
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
-            if (!await SignInManager.HasBeenVerifiedAsync())
+            if (!await _signInManager.HasBeenVerifiedAsync())
             {
                 return View("Error");
             }
@@ -107,7 +109,7 @@ namespace PointyPointy.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            SignInStatus result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
+            SignInStatus result = await _signInManager.TwoFactorSignInAsync(model.Provider, model.Code, model.RememberMe, model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -139,10 +141,10 @@ namespace PointyPointy.Controllers
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
-                IdentityResult result = await UserManager.CreateAsync(user, model.Password);
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, false, false);
+                    await _signInManager.SignInAsync(user, false, false);
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -168,7 +170,7 @@ namespace PointyPointy.Controllers
             {
                 return View("Error");
             }
-            IdentityResult result = await UserManager.ConfirmEmailAsync(userId, code);
+            IdentityResult result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -189,8 +191,8 @@ namespace PointyPointy.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                ApplicationUser user = await _userManager.FindByNameAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ForgotPasswordConfirmation");
@@ -235,13 +237,13 @@ namespace PointyPointy.Controllers
             {
                 return View(model);
             }
-            ApplicationUser user = await UserManager.FindByNameAsync(model.Email);
+            ApplicationUser user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
-            IdentityResult result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            IdentityResult result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
@@ -274,12 +276,12 @@ namespace PointyPointy.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
-            string userId = await SignInManager.GetVerifiedUserIdAsync();
+            string userId = await _signInManager.GetVerifiedUserIdAsync();
             if (userId == null)
             {
                 return View("Error");
             }
-            IList<string> userFactors = await UserManager.GetValidTwoFactorProvidersAsync(userId);
+            IList<string> userFactors = await _userManager.GetValidTwoFactorProvidersAsync(userId);
             List<SelectListItem> factorOptions = userFactors.Select(purpose => new SelectListItem {Text = purpose, Value = purpose}).ToList();
             return View(new SendCodeViewModel {Providers = factorOptions, ReturnUrl = returnUrl, RememberMe = rememberMe});
         }
@@ -297,7 +299,7 @@ namespace PointyPointy.Controllers
             }
 
             // Generate the token and send it
-            if (!await SignInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
+            if (!await _signInManager.SendTwoFactorCodeAsync(model.SelectedProvider))
             {
                 return View("Error");
             }
@@ -316,7 +318,7 @@ namespace PointyPointy.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login
-            SignInStatus result = await SignInManager.ExternalSignInAsync(loginInfo, false);
+            SignInStatus result = await _signInManager.ExternalSignInAsync(loginInfo, false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -355,13 +357,13 @@ namespace PointyPointy.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
-                IdentityResult result = await UserManager.CreateAsync(user);
+                IdentityResult result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await UserManager.AddLoginAsync(user.Id, info.Login);
+                    result = await _userManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, false, false);
+                        await _signInManager.SignInAsync(user, false, false);
                         return RedirectToLocal(returnUrl);
                     }
                 }

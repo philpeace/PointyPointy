@@ -14,8 +14,6 @@ namespace PointyPointy.Controllers
     [Authorize]
     public class ManageController : Controller
     {
-        private readonly IApplicationSignInManagerFactory _applicationSignInManagerFactory;
-        private readonly IApplicationUserManagerFactory _applicationUserManagerFactory;
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -25,11 +23,8 @@ namespace PointyPointy.Controllers
 
         public ManageController(IApplicationSignInManagerFactory applicationSignInManagerFactory, IApplicationUserManagerFactory applicationUserManagerFactory)
         {
-            _applicationSignInManagerFactory = applicationSignInManagerFactory;
-            _applicationUserManagerFactory = applicationUserManagerFactory;
-
-            _signInManager = _applicationSignInManagerFactory.Create();
-            _userManager = _applicationUserManagerFactory.Create();
+            _signInManager = applicationSignInManagerFactory.Create();
+            _userManager = applicationUserManagerFactory.Create();
         }
 
         //public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
