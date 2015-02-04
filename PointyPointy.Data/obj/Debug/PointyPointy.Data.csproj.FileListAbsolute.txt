@@ -26,3 +26,6 @@ C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\EntityFramework.SqlServer.x
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csprojResolveAssemblyReference.cache
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.dll
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInvites.resources
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csproj.GenerateResource.Cache
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsernullableRespond.resources

@@ -65,6 +65,15 @@
     <Compile Include="Entities\ScrumInvite.cs" />
     <Compile Include="IDBContext.cs" />
     <Compile Include="IRepository.cs" />
+    <Compile Include="Migrations\201502041150083_ScrumInvites.cs" />
+    <Compile Include="Migrations\201502041150083_ScrumInvites.Designer.cs">
+      <DependentUpon>201502041150083_ScrumInvites.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502041155115_ScrumInviteUser nullable Respond.cs" />
+    <Compile Include="Migrations\201502041155115_ScrumInviteUser nullable Respond.Designer.cs">
+      <DependentUpon>201502041155115_ScrumInviteUser nullable Respond.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PointyInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -77,6 +86,14 @@
       <Project>{1c036c34-63d5-43b5-9bf6-b87773abce42}</Project>
       <Name>CodePeace.Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502041150083_ScrumInvites.resx">
+      <DependentUpon>201502041150083_ScrumInvites.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502041155115_ScrumInviteUser nullable Respond.resx">
+      <DependentUpon>201502041155115_ScrumInviteUser nullable Respond.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

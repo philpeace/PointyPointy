@@ -45,11 +45,11 @@ namespace PointyPointy.Data.Contexts
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ScrumInvite>().HasKey<int>(k => k.Id);
-            modelBuilder.Entity<ScrumInvite>().Property<int>(p => p.UserId).IsRequired();
+            modelBuilder.Entity<ScrumInvite>().Property(p => p.UserId).IsRequired();
             modelBuilder.Entity<ScrumInvite>().Property<DateTime>(p => p.Created);
 
             modelBuilder.Entity<ScrumInviteUser>().HasKey<int>(k => k.Id);
-            modelBuilder.Entity<ScrumInviteUser>().Property<int>(p => p.UserId).IsRequired();
+            modelBuilder.Entity<ScrumInviteUser>().Property(p => p.UserId).IsRequired();
             modelBuilder.Entity<ScrumInviteUser>().Property<DateTime>(p => p.Responded);
             modelBuilder.Entity<ScrumInviteUser>().Property<bool>(p => p.Accepted);
             modelBuilder.Entity<ScrumInviteUser>().HasRequired(s => s.ScrumInvite).WithRequiredDependent();

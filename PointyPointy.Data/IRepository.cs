@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using CodePeace.Common;
 
 namespace PointyPointy.Data
 {
-    public interface IRepository<T> where T : class, IDependency
+    public interface IRepository<T> where T : class
     {
         IQueryable<T> Table { get; }
 

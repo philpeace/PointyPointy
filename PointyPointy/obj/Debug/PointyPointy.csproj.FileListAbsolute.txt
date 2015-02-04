@@ -134,3 +134,5 @@ C:\projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.dll
 C:\projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.pdb
 D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.dll
 D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.pdb
+C:\projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.dll
+C:\projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.pdb

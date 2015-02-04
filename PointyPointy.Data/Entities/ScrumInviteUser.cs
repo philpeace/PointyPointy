@@ -8,9 +8,9 @@ namespace PointyPointy.Data.Entities
 
         public ScrumInvite ScrumInvite { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
 
-        public DateTime Responded { get; set; }
+        public DateTime? Responded { get; set; }
 
         public bool Accepted { get; set; }
     }

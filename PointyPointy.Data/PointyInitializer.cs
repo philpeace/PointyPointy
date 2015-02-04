@@ -10,7 +10,7 @@ namespace PointyPointy.Data
         {
             if (!context.Database.Exists())
             {
-                throw new InvalidDataException("The PointyContext database does not exist.");
+                context.Database.CreateIfNotExists();
             }
         }
     }
