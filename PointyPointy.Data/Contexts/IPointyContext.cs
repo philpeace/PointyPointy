@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using CodePeace.Common;
 using PointyPointy.Data.Entities;
 
 namespace PointyPointy.Data.Contexts

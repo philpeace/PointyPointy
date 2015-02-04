@@ -294,6 +294,10 @@
       <Project>{1c036c34-63d5-43b5-9bf6-b87773abce42}</Project>
       <Name>CodePeace.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PointyPointy.Data\PointyPointy.Data.csproj">
+      <Project>{058a8446-e147-4250-a644-246212002e57}</Project>
+      <Name>PointyPointy.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PointyPointy.Services\PointyPointy.Services.csproj">
       <Project>{49e3f9d3-7ee7-4d61-8180-cd8c2e8ec731}</Project>
       <Name>PointyPointy.Services</Name>

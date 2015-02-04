@@ -22,6 +22,9 @@ namespace PointyPointy
                 .Where(t => typeof (IDependency).IsAssignableFrom(t))
                 .AsImplementedInterfaces();
 
+            builder.RegisterType<
+
+
             // Set the dependency resolver to be Autofac.
             builder.RegisterControllers(assemblies).InjectActionInvoker();
             builder.RegisterModelBinders(assemblies);

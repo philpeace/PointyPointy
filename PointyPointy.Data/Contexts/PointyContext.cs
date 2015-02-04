@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -40,5 +41,18 @@ namespace PointyPointy.Data.Contexts
         public IDbSet<ScrumInvite> ScrumInvite { get; set; }
 
         public IDbSet<ScrumInviteUser> ScrumInviteUser { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ScrumInvite>().HasKey<int>(k => k.Id);
+            modelBuilder.Entity<ScrumInvite>().Property<int>(p => p.UserId).IsRequired();
+            modelBuilder.Entity<ScrumInvite>().Property<DateTime>(p => p.Created);
+
+            modelBuilder.Entity<ScrumInviteUser>().HasKey<int>(k => k.Id);
+            modelBuilder.Entity<ScrumInviteUser>().Property<int>(p => p.UserId).IsRequired();
+            modelBuilder.Entity<ScrumInviteUser>().Property<DateTime>(p => p.Responded);
+            modelBuilder.Entity<ScrumInviteUser>().Property<bool>(p => p.Accepted);
+            modelBuilder.Entity<ScrumInviteUser>().HasRequired(s => s.ScrumInvite).WithRequiredDependent();
+        }
     }
 }

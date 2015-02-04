@@ -6,7 +6,7 @@ namespace PointyPointy.Data.Entities
     {
         public int Id { get; set; }
 
-        public int ScrumInviteId { get; set; }
+        public ScrumInvite ScrumInvite { get; set; }
 
         public int UserId { get; set; }
 
