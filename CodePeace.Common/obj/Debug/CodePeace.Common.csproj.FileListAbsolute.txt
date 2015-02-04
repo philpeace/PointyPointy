@@ -5,6 +5,5 @@ D:\Projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.dll
 D:\Projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.pdb
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.dll
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.pdb
-C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.csprojResolveAssemblyReference.cache
 C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.dll
 C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.pdb

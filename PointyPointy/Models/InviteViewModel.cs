@@ -1,6 +1,6 @@
 ﻿namespace PointyPointy.Models
 {
-    public class InviteIndexViewModel
+    public class InviteViewModel : BaseViewModel
     {
         
     }

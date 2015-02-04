@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using PointyPointy.Data;
@@ -11,24 +12,24 @@ namespace PointyPointy.Controllers
     [Authorize]
     public class InviteController : Controller
     {
-        private readonly IRepository<ScrumInvite> _scrumInviteRepository;
-        private ApplicationUserManager _applicationUserManager;
+        private readonly IScrumInviteService _scrumInviteService;
 
-        public InviteController(IRepository<ScrumInvite> scrumInviteRepository, IApplicationUserManagerFactory applicationUserManagerFactory)
+        public InviteController(IScrumInviteService scrumInviteService)
         {
-            _scrumInviteRepository = scrumInviteRepository;
-
-            _applicationUserManager = applicationUserManagerFactory.Create();
+            _scrumInviteService = scrumInviteService;
         }
 
         // GET: Invite
-        public async Task<ActionResult> Index()
+        public ActionResult Index(InviteViewModel vm)
         {
-            var vm = new InviteIndexViewModel();
+            return View(vm);
+        }
 
-            var user = await _applicationUserManager.FindByIdAsync(User.Identity.GetUserId());
-
-            var s = _scrumInviteRepository.Create(new ScrumInvite { UserId = user.Id });
+        // POST: Invite/Create
+        [HttpPost]
+        public ActionResult Create(InviteCreateViewModel vm)
+        {
+            _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
 
             return View(vm);
         }

@@ -1,3 +1,14 @@
-﻿@model PointyPointy.Models.InviteIndexViewModel
+﻿@model PointyPointy.Models.InviteViewModel
 
-<h2>Invite</h2>
+<h2>Invite [ @Model.User.UserName ]</h2>
+
+@using (Html.BeginForm("Create", "Invite"))
+{
+    <fieldset>
+        <legend>Invite some people</legend>
+        
+        <label for="invitees">Invitees</label>
+        <textarea name="invitees" id="invitees"></textarea>
+        <input type="submit"/>
+    </fieldset>
+}
