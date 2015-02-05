@@ -1,4 +1,4 @@
-﻿namespace PointyPointy.Models
+﻿namespace PointyPointy.ViewModels
 {
     public class InviteViewModel : BaseViewModel
     {

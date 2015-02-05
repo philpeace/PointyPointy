@@ -1,8 +1,8 @@
 using PointyPointy.Data.Entities;
 
-namespace PointyPointy.Models
+namespace PointyPointy.ViewModels
 {
-    public class InviteResponseViewModel
+    public class InviteResponseViewModel : InviteViewModel
     {
         public int Id { get; set; }
 

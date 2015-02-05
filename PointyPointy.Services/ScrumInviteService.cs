@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mime;
-using System.Threading.Tasks;
 using PointyPointy.Data;
 using PointyPointy.Data.Entities;
 
@@ -34,6 +31,11 @@ namespace PointyPointy.Services
             }
 
             return null;
+        }
+
+        public ScrumInviteUser GetInviteUserForKey(string key, string email)
+        {
+            return _scrumInviteUserRepository.Fetch(i => i.RequestKey == key && i.Email == email).FirstOrDefault();
         }
 
         public ScrumInviteUser Respond(int id, string email, bool accept)

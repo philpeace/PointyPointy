@@ -13,5 +13,7 @@ namespace PointyPointy.Data.Entities
         public DateTime? Responded { get; set; }
 
         public bool Accepted { get; set; }
+
+        public string RequestKey { get; set; }
     }
 }

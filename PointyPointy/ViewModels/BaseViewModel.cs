@@ -1,4 +1,6 @@
-﻿namespace PointyPointy.Models
+﻿using PointyPointy.Models;
+
+namespace PointyPointy.ViewModels
 {
     public class BaseViewModel
     {

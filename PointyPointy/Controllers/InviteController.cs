@@ -6,6 +6,7 @@ using PointyPointy.Data;
 using PointyPointy.Data.Entities;
 using PointyPointy.Models;
 using PointyPointy.Services;
+using PointyPointy.ViewModels;
 
 namespace PointyPointy.Controllers
 {
@@ -25,8 +26,17 @@ namespace PointyPointy.Controllers
             return View(vm);
         }
 
-        // GET: Invite/Respond/Id
-        public ActionResult Respond(InviteResponseViewModel vm)
+        // GET: Invite/Respond
+        public ActionResult Respond(InviteRespondViewModel vm)
+        {
+            
+
+            return View(vm);
+        }
+
+        // POST: Invite/Response
+        [HttpPost]
+        public ActionResult Response(InviteResponseViewModel vm)
         {
             vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Accept);
 

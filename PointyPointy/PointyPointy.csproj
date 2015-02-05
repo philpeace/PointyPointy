@@ -188,7 +188,6 @@
     <Compile Include="ModelBinders\InviteViewModelBinder.cs" />
     <Compile Include="Models\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\BaseViewModel.cs" />
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\FactorViewModel.cs" />
     <Compile Include="Models\ForgotPasswordViewModel.cs" />
@@ -197,9 +196,6 @@
     <Compile Include="Models\ForgotViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
-    <Compile Include="Models\InviteCreateViewModel.cs" />
-    <Compile Include="Models\InviteResponseViewModel.cs" />
-    <Compile Include="Models\InviteViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageLoginsViewModel.cs" />
     <Compile Include="Models\ConfigureTwoFactorViewModel.cs" />
@@ -219,6 +215,11 @@
     <Compile Include="Services\IApplicationUserManagerFactory.cs" />
     <Compile Include="Services\SmsService.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\InviteCreateViewModel.cs" />
+    <Compile Include="ViewModels\InviteRespondViewModel.cs" />
+    <Compile Include="ViewModels\InviteResponseViewModel.cs" />
+    <Compile Include="ViewModels\InviteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -290,7 +291,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Invite\Index.cshtml" />
     <Content Include="Views\Invite\Create.cshtml" />
-    <Content Include="Views\Invite\Respond.cshtml" />
+    <Content Include="Views\Invite\Response.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

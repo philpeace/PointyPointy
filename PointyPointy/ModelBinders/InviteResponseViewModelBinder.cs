@@ -2,6 +2,7 @@ using System.Web.Mvc;
 using Autofac.Integration.Mvc;
 using PointyPointy.Models;
 using PointyPointy.Services;
+using PointyPointy.ViewModels;
 
 namespace PointyPointy.ModelBinders
 {
