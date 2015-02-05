@@ -184,6 +184,7 @@
     </Compile>
     <Compile Include="ModelBinders\BaseViewModelBinder.cs" />
     <Compile Include="ModelBinders\InviteCreateViewModelBinder.cs" />
+    <Compile Include="ModelBinders\InviteResponseViewModelBinder.cs" />
     <Compile Include="ModelBinders\InviteViewModelBinder.cs" />
     <Compile Include="Models\AddPhoneNumberViewModel.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\IndexViewModel.cs" />
     <Compile Include="Models\InviteCreateViewModel.cs" />
+    <Compile Include="Models\InviteResponseViewModel.cs" />
     <Compile Include="Models\InviteViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageLoginsViewModel.cs" />
@@ -288,6 +290,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Invite\Index.cshtml" />
     <Content Include="Views\Invite\Create.cshtml" />
+    <Content Include="Views\Invite\Respond.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

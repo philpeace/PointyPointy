@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PointyPointy.Data.Entities
 {
@@ -14,5 +15,7 @@ namespace PointyPointy.Data.Entities
         public string UserId { get; set; }
 
         public DateTime Created { get; set; }
+
+        public IList<ScrumInviteUser> Users { get; set; }
     }
 }

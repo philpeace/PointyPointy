@@ -73,6 +73,18 @@
     <Compile Include="Migrations\201502041155115_ScrumInviteUser nullable Respond.Designer.cs">
       <DependentUpon>201502041155115_ScrumInviteUser nullable Respond.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502041628315_ScrumInviteUser add email.cs" />
+    <Compile Include="Migrations\201502041628315_ScrumInviteUser add email.Designer.cs">
+      <DependentUpon>201502041628315_ScrumInviteUser add email.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502041656317_ScrumInviteUsers.ScrumInvite removeal.cs" />
+    <Compile Include="Migrations\201502041656317_ScrumInviteUsers.ScrumInvite removeal.Designer.cs">
+      <DependentUpon>201502041656317_ScrumInviteUsers.ScrumInvite removeal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502051353356_ScrumInviteUsersMapping.cs" />
+    <Compile Include="Migrations\201502051353356_ScrumInviteUsersMapping.Designer.cs">
+      <DependentUpon>201502051353356_ScrumInviteUsersMapping.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PointyInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +105,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502041155115_ScrumInviteUser nullable Respond.resx">
       <DependentUpon>201502041155115_ScrumInviteUser nullable Respond.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502041628315_ScrumInviteUser add email.resx">
+      <DependentUpon>201502041628315_ScrumInviteUser add email.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502041656317_ScrumInviteUsers.ScrumInvite removeal.resx">
+      <DependentUpon>201502041656317_ScrumInviteUsers.ScrumInvite removeal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502051353356_ScrumInviteUsersMapping.resx">
+      <DependentUpon>201502051353356_ScrumInviteUsersMapping.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

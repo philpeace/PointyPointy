@@ -25,6 +25,14 @@ namespace PointyPointy.Controllers
             return View(vm);
         }
 
+        // GET: Invite/Respond/Id
+        public ActionResult Respond(InviteResponseViewModel vm)
+        {
+            vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Accept);
+
+            return View(vm);
+        }
+
         // POST: Invite/Create
         [HttpPost]
         public ActionResult Create(InviteCreateViewModel vm)

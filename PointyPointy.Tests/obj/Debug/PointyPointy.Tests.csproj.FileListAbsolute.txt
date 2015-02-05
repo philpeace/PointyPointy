@@ -102,3 +102,5 @@ D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Data.dll
 D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Data.pdb
 C:\projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Data.dll
 C:\projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Data.pdb
+C:\projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Services.dll
+C:\projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Services.pdb

@@ -29,3 +29,6 @@ C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInvites.resources
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csproj.GenerateResource.Cache
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsernullableRespond.resources
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUseraddemail.resources
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersScrumInviteremoveal.resources
+C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersMapping.resources

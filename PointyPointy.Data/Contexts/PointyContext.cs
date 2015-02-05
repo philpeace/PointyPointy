@@ -47,12 +47,13 @@ namespace PointyPointy.Data.Contexts
             modelBuilder.Entity<ScrumInvite>().HasKey<int>(k => k.Id);
             modelBuilder.Entity<ScrumInvite>().Property(p => p.UserId).IsRequired();
             modelBuilder.Entity<ScrumInvite>().Property<DateTime>(p => p.Created);
+            modelBuilder.Entity<ScrumInvite>().HasMany(s => s.Users).WithRequired(s => s.Invite);
 
             modelBuilder.Entity<ScrumInviteUser>().HasKey<int>(k => k.Id);
-            modelBuilder.Entity<ScrumInviteUser>().Property(p => p.UserId).IsRequired();
+            modelBuilder.Entity<ScrumInviteUser>().Property(p => p.Email).IsRequired();
             modelBuilder.Entity<ScrumInviteUser>().Property<DateTime>(p => p.Responded);
             modelBuilder.Entity<ScrumInviteUser>().Property<bool>(p => p.Accepted);
-            modelBuilder.Entity<ScrumInviteUser>().HasRequired(s => s.ScrumInvite).WithRequiredDependent();
+            modelBuilder.Entity<ScrumInviteUser>().HasRequired(p => p.Invite).WithMany(i => i.Users);
         }
     }
 }
