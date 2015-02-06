@@ -16,7 +16,7 @@ namespace PointyPointy
 {
     public static class ContainerConfig
     {
-        public static void BuildContainer(ContainerBuilder builder)
+        public static IContainer BuildContainer(ContainerBuilder builder)
         {
             Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
@@ -52,9 +52,11 @@ namespace PointyPointy
             builder.RegisterModelBinders(assemblies);
             builder.RegisterModelBinderProvider();
             builder.RegisterFilterProvider();
-            IContainer container = builder.Build();
+            var container = builder.Build();
 
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            return container;
         }
     }
 }

@@ -32,3 +32,6 @@ C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migration
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUseraddemail.resources
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersScrumInviteremoveal.resources
 C:\projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersMapping.resources
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\System.Web.Optimization.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\dotless.Core.dll
+C:\projects\PointyPointy\PointyPointy.Data\bin\Debug\System.Web.Optimization.xml

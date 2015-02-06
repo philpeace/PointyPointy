@@ -7,3 +7,14 @@ C:\projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.dll
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.pdb
 C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.dll
 C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.pdb
+C:\projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.csprojResolveAssemblyReference.cache
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.dll.config
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Antlr3.Runtime.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\dotless.Core.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Newtonsoft.Json.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\System.Web.Optimization.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\WebGrease.dll
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Antlr3.Runtime.pdb
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Newtonsoft.Json.xml
+C:\projects\PointyPointy\CodePeace.Common\bin\Debug\System.Web.Optimization.xml
