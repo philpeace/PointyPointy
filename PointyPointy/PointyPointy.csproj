@@ -222,6 +222,20 @@
     <Compile Include="ViewModels\InviteViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\Less\pointy-variables.css">
+      <DependentUpon>pointy-variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\pointy-variables.min.css">
+      <DependentUpon>pointy-variables.css</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\site.css">
+      <DependentUpon>site.less</DependentUpon>
+    </Content>
+    <Content Include="Content\Less\site.min.css">
+      <DependentUpon>site.css</DependentUpon>
+    </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -300,6 +314,28 @@
     <Content Include="Content\Less\variables.less" />
     <Content Include="Content\Less\wells.less" />
     <Content Include="Content\Less\site.less" />
+    <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff" />
+    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\fonts\FontAwesome.otf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\Less\fontawesome\animated.less" />
+    <Content Include="Content\Less\fontawesome\bordered-pulled.less" />
+    <Content Include="Content\Less\fontawesome\core.less" />
+    <Content Include="Content\Less\fontawesome\fixed-width.less" />
+    <Content Include="Content\Less\fontawesome\font-awesome.less" />
+    <Content Include="Content\Less\fontawesome\icons.less" />
+    <Content Include="Content\Less\fontawesome\larger.less" />
+    <Content Include="Content\Less\fontawesome\list.less" />
+    <Content Include="Content\Less\fontawesome\mixins.less" />
+    <Content Include="Content\Less\fontawesome\path.less" />
+    <Content Include="Content\Less\fontawesome\rotated-flipped.less" />
+    <Content Include="Content\Less\fontawesome\stacked.less" />
+    <Content Include="Content\Less\fontawesome\variables.less" />
+    <Content Include="Content\Less\pointy-variables.less" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
