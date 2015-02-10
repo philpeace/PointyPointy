@@ -18,6 +18,7 @@ namespace CodePeace.Common.Web.Bundling
 
         public LessTransformer()
         {
+
         }
 
         public LessTransformer(bool compress, bool debug)
@@ -39,6 +40,10 @@ namespace CodePeace.Common.Web.Bundling
 
                 var css = TransformToCss(lessParser, bundleFile, lessEngine);
                 content.AppendFormat("{0}\n", css);
+                SetCurrentFilePath(lessParser, bundleFile.FullName);
+                var source = File.ReadAllText(bundleFile.FullName);
+                content.Append(lessEngine.TransformToCss(source, bundleFile.FullName));
+                content.AppendLine();
 
                 bundleFiles.AddRange(GetFileDependencies(lessParser));
             }
@@ -101,10 +106,12 @@ namespace CodePeace.Common.Web.Bundling
 
         public IPathResolver GetPathResolver(Parser lessParser)
         {
-            var importer = lessParser.Importer as Importer;
-            var fileReader = importer.FileReader as FileReader;
-
-            return fileReader.PathResolver;
+            if (fileReader == null || !(fileReader.PathResolver is ImportedFilePathResolver))
+            {
+                fileReader = new FileReader(new ImportedFilePathResolver(currentFilePath));
+                importer.FileReader = fileReader;
+            }
         }
     }
 }
+
