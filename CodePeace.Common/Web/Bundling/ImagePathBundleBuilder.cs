@@ -27,9 +27,9 @@ namespace CodePeace.Common.Web.Bundling
                 {
                     if (bundle != null)
                     {
-                        var appPath = GetAppPath(context);
+                        string appPath = GetAppPath(context);
                         var stringBuilder = new StringBuilder();
-                        var boundaryIdentifier = "";
+                        string boundaryIdentifier = "";
 
                         if (context.EnableInstrumentation)
                         {
@@ -54,14 +54,14 @@ namespace CodePeace.Common.Web.Bundling
                             concatenationToken = Environment.NewLine;
                         }
 
-                        foreach (var file in files)
+                        foreach (BundleFile file in files)
                         {
                             if (context.EnableInstrumentation)
                             {
                                 stringBuilder.Append(GetFileHeader(appPath, file, GetInstrumentedFileHeaderFormat(boundaryIdentifier)));
                             }
 
-                            var content = ProcessImageReferences(file, context);
+                            string content = ProcessImageReferences(file, context);
 
                             stringBuilder.Append(content);
                             stringBuilder.Append(concatenationToken);
@@ -81,14 +81,14 @@ namespace CodePeace.Common.Web.Bundling
 
         private static string ProcessImageReferences(BundleFile file, BundleContext context)
         {
-            var filePath = context.HttpContext.Server.MapPath(file.IncludedVirtualPath);
+            string filePath = context.HttpContext.Server.MapPath(file.IncludedVirtualPath);
 
-            var content = File.ReadAllText(filePath);
+            string content = File.ReadAllText(filePath);
             var fromUri = new Uri(context.HttpContext.Server.MapPath("~/"));
             var toUri = new Uri(Path.GetDirectoryName(filePath));
-            var relativeUri = fromUri.MakeRelativeUri(toUri);
+            Uri relativeUri = fromUri.MakeRelativeUri(toUri);
 
-            var imageUrlRoot = string.Format("{0}/{1}", context.HttpContext.Request.ApplicationPath, relativeUri);
+            string imageUrlRoot = string.Format("{0}/{1}", context.HttpContext.Request.ApplicationPath, relativeUri);
             content = content.Replace("url(images", "url(" + imageUrlRoot + "/images");
 
             return content;
@@ -96,7 +96,7 @@ namespace CodePeace.Common.Web.Bundling
 
         internal static string ConvertToAppRelativePath(string fullName, string appPath)
         {
-            var str = !fullName.StartsWith(appPath, StringComparison.OrdinalIgnoreCase) ? fullName : fullName.Replace(appPath, "~/");
+            string str = !fullName.StartsWith(appPath, StringComparison.OrdinalIgnoreCase) ? fullName : fullName.Replace(appPath, "~/");
 
             str = str.Replace(char.ConvertFromUtf32(92), char.ConvertFromUtf32(47));
 
@@ -105,11 +105,11 @@ namespace CodePeace.Common.Web.Bundling
 
         private static string GenerateBundlePreamble(string bundleHash)
         {
-            var instrumentedBundlePreamble = GetInstrumentedBundlePreamble(bundleHash);
+            Dictionary<string, string> instrumentedBundlePreamble = GetInstrumentedBundlePreamble(bundleHash);
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("/* ");
 
-            foreach (var key in instrumentedBundlePreamble.Keys)
+            foreach (string key in instrumentedBundlePreamble.Keys)
             {
                 stringBuilder.Append(string.Concat(key, "=", instrumentedBundlePreamble[key], ";"));
             }
@@ -142,7 +142,7 @@ namespace CodePeace.Common.Web.Bundling
                 type = bundle.Transforms[0].GetType();
             }
 
-            var hashCode = type.FullName.GetHashCode();
+            int hashCode = type.FullName.GetHashCode();
 
             return Convert.ToBase64String(Encoding.Unicode.GetBytes(hashCode.ToString(CultureInfo.InvariantCulture)));
         }

@@ -1,5 +1,5 @@
 using System.Data.Entity.Migrations;
-    
+
 namespace PointyPointy.Data.Migrations
 {
     public partial class ScrumInvites : DbMigration
@@ -9,32 +9,31 @@ namespace PointyPointy.Data.Migrations
             CreateTable(
                 "dbo.ScrumInvites",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false),
-                        Created = c.DateTime(nullable: false),
-                    })
+                {
+                    Id = c.Int(false, true),
+                    UserId = c.String(false),
+                    Created = c.DateTime(false),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.ScrumInviteUsers",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false),
-                        Responded = c.DateTime(nullable: false),
-                        Accepted = c.Boolean(nullable: false),
-                    })
+                {
+                    Id = c.Int(false, true),
+                    UserId = c.String(false),
+                    Responded = c.DateTime(false),
+                    Accepted = c.Boolean(false),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.ScrumInvites", t => t.Id)
                 .Index(t => t.Id);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.ScrumInviteUsers", "Id", "dbo.ScrumInvites");
-            DropIndex("dbo.ScrumInviteUsers", new[] { "Id" });
+            DropIndex("dbo.ScrumInviteUsers", new[] {"Id"});
             DropTable("dbo.ScrumInviteUsers");
             DropTable("dbo.ScrumInvites");
         }

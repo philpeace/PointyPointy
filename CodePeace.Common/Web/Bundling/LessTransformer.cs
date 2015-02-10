@@ -16,11 +16,6 @@ namespace CodePeace.Common.Web.Bundling
         private readonly bool _compress;
         private readonly bool _debug;
 
-        public LessTransformer()
-        {
-
-        }
-
         public LessTransformer(bool compress, bool debug)
         {
             _compress = compress;
@@ -30,20 +25,17 @@ namespace CodePeace.Common.Web.Bundling
         public SourceTransformation Transform(IEnumerable<FileInfo> files)
         {
             var lessParser = new Parser();
-            var lessEngine = CreateLessEngine(lessParser);
+            ILessEngine lessEngine = CreateLessEngine(lessParser);
             var bundleFiles = new List<FileInfo>();
             var content = new StringBuilder();
 
-            foreach (var bundleFile in files)
+            foreach (FileInfo bundleFile in files)
             {
                 bundleFiles.Add(bundleFile);
 
-                var css = TransformToCss(lessParser, bundleFile, lessEngine);
+                string css = TransformCss(lessParser, bundleFile, lessEngine);
+
                 content.AppendFormat("{0}\n", css);
-                SetCurrentFilePath(lessParser, bundleFile.FullName);
-                var source = File.ReadAllText(bundleFile.FullName);
-                content.Append(lessEngine.TransformToCss(source, bundleFile.FullName));
-                content.AppendLine();
 
                 bundleFiles.AddRange(GetFileDependencies(lessParser));
             }
@@ -55,13 +47,11 @@ namespace CodePeace.Common.Web.Bundling
             };
         }
 
-        private static string TransformToCss(Parser lessParser, FileSystemInfo bundleFile, ILessEngine lessEngine)
+        private static string TransformCss(Parser lessParser, FileInfo bundleFile, ILessEngine lessEngine)
         {
             SetCurrentFilePath(lessParser, bundleFile.FullName);
-
-            var source = File.ReadAllText(bundleFile.FullName);
-            var css = lessEngine.TransformToCss(source, bundleFile.FullName);
-
+            string source = File.ReadAllText(bundleFile.FullName);
+            string css = lessEngine.TransformToCss(source, bundleFile.FullName);
             return css;
         }
 
@@ -74,9 +64,9 @@ namespace CodePeace.Common.Web.Bundling
 
         private IEnumerable<FileInfo> GetFileDependencies(Parser lessParser)
         {
-            var pathResolver = GetPathResolver(lessParser);
+            IPathResolver pathResolver = GetPathResolver(lessParser);
 
-            foreach (var importPath in lessParser.Importer.Imports)
+            foreach (string importPath in lessParser.Importer.Imports)
             {
                 yield return new FileInfo(pathResolver.GetFullPath(importPath));
             }
@@ -104,14 +94,12 @@ namespace CodePeace.Common.Web.Bundling
             importer.FileReader = fileReader;
         }
 
-        public IPathResolver GetPathResolver(Parser lessParser)
+        private IPathResolver GetPathResolver(Parser lessParser)
         {
-            if (fileReader == null || !(fileReader.PathResolver is ImportedFilePathResolver))
-            {
-                fileReader = new FileReader(new ImportedFilePathResolver(currentFilePath));
-                importer.FileReader = fileReader;
-            }
+            var importer = lessParser.Importer as Importer;
+            var fileReader = importer.FileReader as FileReader;
+
+            return fileReader.PathResolver;
         }
     }
 }
-

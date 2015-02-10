@@ -1,10 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Web.Optimization;
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodePeace.Common.Web.Bundling
 {
