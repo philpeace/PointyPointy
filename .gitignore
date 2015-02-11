@@ -185,3 +185,4 @@ FakesAssemblies/
 
 PointyPointy/Config/Auth.config
 
+*.cache
