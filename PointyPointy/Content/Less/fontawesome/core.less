@@ -1,0 +1,17 @@
+// Base Class Definition
+// -------------------------
+
+.@{fa-css-prefix} {
+    display: inline-block;
+    font: normal normal normal @fa-font-size-base FontAwesome; // shortening font declaration
+    line-height: 1;
+    font-size: inherit; // can't have font-size inherit on line above, so need to override
+    text-rendering: auto; // optimizelegibility throws things off #1094
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+}

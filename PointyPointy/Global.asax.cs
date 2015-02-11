@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
+using CodePeace.Common.Configuration;
 
 namespace PointyPointy
 {
@@ -12,12 +13,16 @@ namespace PointyPointy
         {
             var builder = new ContainerBuilder();
 
-            ContainerConfig.BuildContainer(builder);
+            var container = ContainerConfig.BuildContainer(builder);
+            var appSettingsConfigManager = container.Resolve<IAppSettingsConfigurationManager>();
+            var enableOptimizations = appSettingsConfigManager.Setting<bool>("Bundling.EnableOptimizations");
+
+            BundleTable.EnableOptimizations = enableOptimizations;
 
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleConfig.RegisterBundles(BundleTable.Bundles, BundleTable.EnableOptimizations);
         }
     }
 }

@@ -1,12 +1,12 @@
+﻿using System.Collections.Generic;
+using System.Web.Optimization;
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Optimization;
 
-namespace DrFoster.Common.Web.Bundling
+namespace CodePeace.Common.Web.Bundling
 {
     public class AsIsBundleOrderer : IBundleOrderer
     {

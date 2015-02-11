@@ -1,10 +1,11 @@
-﻿using System;
+﻿using System.Web.Optimization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Web.Optimization;
 
-namespace DrFoster.Common.Web.Bundling
+namespace CodePeace.Common.Web.Bundling
 {
     public static class BundlingExtensions
     {

@@ -4,12 +4,12 @@ using System.Web;
 using System.Web.Hosting;
 using dotless.Core.Input;
 
-namespace DrFoster.Common.Web.Bundling
+namespace CodePeace.Common.Web.Bundling
 {
     public class ImportedFilePathResolver : IPathResolver
     {
-        private string currentFileDirectory;
-        private string currentFilePath;
+        private string _currentFileDirectory;
+        private string _currentFilePath;
 
         public ImportedFilePathResolver(string currentFilePath)
         {
@@ -21,26 +21,16 @@ namespace DrFoster.Common.Web.Bundling
             CurrentFilePath = currentFilePath;
         }
 
-        /// <summary>
-        /// Gets or sets the path to the currently processed file.
-        /// </summary>
         public string CurrentFilePath
         {
-            get
-            {
-                return currentFilePath;
-            }
+            get { return _currentFilePath; }
             set
             {
-                currentFilePath = value;
-                currentFileDirectory = Path.GetDirectoryName(value);
+                _currentFilePath = value;
+                _currentFileDirectory = Path.GetDirectoryName(value);
             }
         }
 
-        /// <summary>
-        /// Returns the absolute path for the specified improted file path.
-        /// </summary>
-        /// <param name="filePath">The imported file path.</param>
         public string GetFullPath(string filePath)
         {
             if (filePath.StartsWith("~"))
@@ -54,7 +44,7 @@ namespace DrFoster.Common.Web.Bundling
             }
             else if (!Path.IsPathRooted(filePath))
             {
-                filePath = Path.GetFullPath(Path.Combine(currentFileDirectory, filePath));
+                filePath = Path.GetFullPath(Path.Combine(_currentFileDirectory, filePath));
             }
 
             return filePath;

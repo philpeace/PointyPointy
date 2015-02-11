@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace DrFoster.Common.Web.Bundling
+namespace CodePeace.Common.Web.Bundling
 {
     public interface ILessTransformer
     {

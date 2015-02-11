@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Optimization;
 
-namespace DrFoster.Common.Web.Bundling
+namespace CodePeace.Common.Web.Bundling
 {
     public class ImagePathBundleBuilder : IBundleBuilder
     {
@@ -14,11 +14,7 @@ namespace DrFoster.Common.Web.Bundling
 
         static ImagePathBundleBuilder()
         {
-            ImagePathBundleBuilder.Instance = new DefaultBundleBuilder();
-        }
-
-        public ImagePathBundleBuilder()
-        {
+            Instance = new DefaultBundleBuilder();
         }
 
         public string BuildBundleContent(Bundle bundle, BundleContext context, IEnumerable<BundleFile> files)
@@ -31,19 +27,19 @@ namespace DrFoster.Common.Web.Bundling
                 {
                     if (bundle != null)
                     {
-                        string appPath = ImagePathBundleBuilder.GetAppPath(context);
+                        var appPath = GetAppPath(context);
                         var stringBuilder = new StringBuilder();
-                        string boundaryIdentifier = "";
+                        var boundaryIdentifier = "";
 
                         if (context.EnableInstrumentation)
                         {
-                            boundaryIdentifier = ImagePathBundleBuilder.GetBoundaryIdentifier(bundle);
-                            stringBuilder.AppendLine(ImagePathBundleBuilder.GenerateBundlePreamble(boundaryIdentifier));
+                            boundaryIdentifier = GetBoundaryIdentifier(bundle);
+                            stringBuilder.AppendLine(GenerateBundlePreamble(boundaryIdentifier));
                         }
 
                         if (string.IsNullOrEmpty(bundle.ConcatenationToken))
                         {
-                            if (bundle.Transforms.Any(transform => typeof (JsMinify).IsAssignableFrom(transform.GetType())))
+                            if (bundle.Transforms.Any(transform => transform is JsMinify))
                             {
                                 concatenationToken = ";";
                             }
@@ -55,17 +51,17 @@ namespace DrFoster.Common.Web.Bundling
 
                         if (concatenationToken == null || context.EnableInstrumentation)
                         {
-                            concatenationToken = System.Environment.NewLine;
+                            concatenationToken = Environment.NewLine;
                         }
 
-                        foreach (BundleFile file in files)
+                        foreach (var file in files)
                         {
                             if (context.EnableInstrumentation)
                             {
-                                stringBuilder.Append(ImagePathBundleBuilder.GetFileHeader(appPath, file, ImagePathBundleBuilder.GetInstrumentedFileHeaderFormat(boundaryIdentifier)));
+                                stringBuilder.Append(GetFileHeader(appPath, file, GetInstrumentedFileHeaderFormat(boundaryIdentifier)));
                             }
 
-                            string content = ProcessImageReferences(file, context);
+                            var content = ProcessImageReferences(file, context);
 
                             stringBuilder.Append(content);
                             stringBuilder.Append(concatenationToken);
@@ -73,48 +69,34 @@ namespace DrFoster.Common.Web.Bundling
 
                         return stringBuilder.ToString();
                     }
-                    else
-                    {
-                        throw new ArgumentNullException("bundle");
-                    }
+
+                    throw new ArgumentNullException("bundle");
                 }
-                else
-                {
-                    throw new ArgumentNullException("context");
-                }
+
+                throw new ArgumentNullException("context");
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
 
-        private string ProcessImageReferences(BundleFile file, BundleContext context)
+        private static string ProcessImageReferences(BundleFile file, BundleContext context)
         {
             var filePath = context.HttpContext.Server.MapPath(file.IncludedVirtualPath);
 
             var content = File.ReadAllText(filePath);
             var fromUri = new Uri(context.HttpContext.Server.MapPath("~/"));
             var toUri = new Uri(Path.GetDirectoryName(filePath));
-            
-            string imageUrlRoot = context.HttpContext.Request.ApplicationPath + "/" + fromUri.MakeRelativeUri(toUri).ToString();
+            var relativeUri = fromUri.MakeRelativeUri(toUri);
+
+            var imageUrlRoot = string.Format("{0}/{1}", context.HttpContext.Request.ApplicationPath, relativeUri);
             content = content.Replace("url(images", "url(" + imageUrlRoot + "/images");
-            
+
             return content;
         }
 
         internal static string ConvertToAppRelativePath(string fullName, string appPath)
         {
-            string str;
-
-            if (!fullName.StartsWith(appPath, StringComparison.OrdinalIgnoreCase))
-            {
-                str = fullName;
-            }
-            else
-            {
-                str = fullName.Replace(appPath, "~/");
-            }
+            var str = !fullName.StartsWith(appPath, StringComparison.OrdinalIgnoreCase) ? fullName : fullName.Replace(appPath, "~/");
 
             str = str.Replace(char.ConvertFromUtf32(92), char.ConvertFromUtf32(47));
 
@@ -123,11 +105,11 @@ namespace DrFoster.Common.Web.Bundling
 
         private static string GenerateBundlePreamble(string bundleHash)
         {
-            Dictionary<string, string> instrumentedBundlePreamble = ImagePathBundleBuilder.GetInstrumentedBundlePreamble(bundleHash);
-            StringBuilder stringBuilder = new StringBuilder();
+            var instrumentedBundlePreamble = GetInstrumentedBundlePreamble(bundleHash);
+            var stringBuilder = new StringBuilder();
             stringBuilder.Append("/* ");
 
-            foreach (string key in instrumentedBundlePreamble.Keys)
+            foreach (var key in instrumentedBundlePreamble.Keys)
             {
                 stringBuilder.Append(string.Concat(key, "=", instrumentedBundlePreamble[key], ";"));
             }
@@ -143,10 +125,8 @@ namespace DrFoster.Common.Web.Bundling
             {
                 return string.Empty;
             }
-            else
-            {
-                return context.HttpContext.Request.PhysicalApplicationPath;
-            }
+
+            return context.HttpContext.Request.PhysicalApplicationPath;
         }
 
         private static string GetBoundaryIdentifier(Bundle bundle)
@@ -162,7 +142,7 @@ namespace DrFoster.Common.Web.Bundling
                 type = bundle.Transforms[0].GetType();
             }
 
-            int hashCode = type.FullName.GetHashCode();
+            var hashCode = type.FullName.GetHashCode();
 
             return Convert.ToBase64String(Encoding.Unicode.GetBytes(hashCode.ToString(CultureInfo.InvariantCulture)));
         }
@@ -171,23 +151,21 @@ namespace DrFoster.Common.Web.Bundling
         {
             if (!string.IsNullOrEmpty(fileHeaderFormat))
             {
-                object[] appRelativePath = new object[1];
-                appRelativePath[0] = ImagePathBundleBuilder.ConvertToAppRelativePath(file.VirtualFile.Name, appPath);
-                
+                var appRelativePath = new object[1];
+                appRelativePath[0] = ConvertToAppRelativePath(file.VirtualFile.Name, appPath);
+
                 return string.Concat(string.Format(CultureInfo.InvariantCulture, fileHeaderFormat, appRelativePath), "\r\n");
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
 
         private static Dictionary<string, string> GetInstrumentedBundlePreamble(string boundaryValue)
         {
-            Dictionary<string, string> strs = new Dictionary<string, string>();
+            var strs = new Dictionary<string, string>();
             strs["Bundle"] = "System.Web.Optimization.Bundle";
             strs["Boundary"] = boundaryValue;
-            
+
             return strs;
         }
 

@@ -1,30 +1,44 @@
 ﻿using System.Web.Optimization;
+using CodePeace.Common.Web.Bundling;
 
 namespace PointyPointy
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
-        public static void RegisterBundles(BundleCollection bundles)
+        public static void RegisterBundles(BundleCollection bundles, bool enableOptimizations)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                "~/Scripts/jquery-{version}.js"));
+            var mainLessBundle = new Bundle("~/Content/css", new LessBundleTransform())
+                                        .Include("~/Content/less/site.less");
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                "~/Scripts/jquery.validate*"));
+            if (enableOptimizations)
+            {
+                mainLessBundle.Transforms.Add(new CssMinify());
+            }
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                "~/Scripts/modernizr-*"));
+            bundles.Add(mainLessBundle);
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                "~/Scripts/bootstrap.js",
-                "~/Scripts/respond.js"));
+            // Scripts
+            bundles.Add(new ScriptBundle("~/Scripts/head")
+                .Include("~/Scripts/modernizr-*")
+            );
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                "~/Content/bootstrap.css",
-                "~/Content/site.css"));
+            var scriptBundle = new ScriptBundle("~/Scripts/foot")
+                        .Include("~/Scripts/jquery-{version}.js")
+                        .Include("~/scripts/affix.js")
+                        .Include("~/scripts/alert.js")
+                        .Include("~/scripts/button.js")
+                        .Include("~/scripts/carousel.js")
+                        .Include("~/scripts/collapse.js")
+                        .Include("~/scripts/dropdown.js")
+                        .Include("~/scripts/modal.js")
+                        .Include("~/scripts/tooltip.js")
+                        .Include("~/scripts/popover.js")
+                        .Include("~/scripts/scrollspy.js")
+                        .Include("~/scripts/tab.js")
+                        .Include("~/scripts/transition.js");
+
+            scriptBundle.Orderer = new AsIsBundleOrderer();
+            bundles.Add(scriptBundle);
         }
     }
 }
