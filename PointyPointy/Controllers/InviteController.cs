@@ -10,7 +10,6 @@ using PointyPointy.ViewModels;
 
 namespace PointyPointy.Controllers
 {
-    [Authorize]
     public class InviteController : Controller
     {
         private readonly IScrumInviteService _scrumInviteService;
@@ -21,8 +20,19 @@ namespace PointyPointy.Controllers
         }
 
         // GET: Invite
+        [Authorize]
         public ActionResult Index(InviteViewModel vm)
         {
+            return View(vm);
+        }
+
+        // POST: Invite/Create
+        [HttpPost]
+        [Authorize]
+        public ActionResult Create(InviteCreateViewModel vm)
+        {
+            _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+
             return View(vm);
         }
 
@@ -36,18 +46,10 @@ namespace PointyPointy.Controllers
 
         // POST: Invite/Response
         [HttpPost]
-        public ActionResult Response(InviteResponseViewModel vm)
+        [Authorize]
+        public ActionResult Respond(InviteResponseViewModel vm)
         {
             vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Accept);
-
-            return View(vm);
-        }
-
-        // POST: Invite/Create
-        [HttpPost]
-        public ActionResult Create(InviteCreateViewModel vm)
-        {
-            _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
 
             return View(vm);
         }
