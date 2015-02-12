@@ -24,7 +24,7 @@ namespace CodePeace.Common.Web.Bundling
 
             context.HttpContext.Response.Cache.SetLastModifiedFromFileDependencies();
 
-            var transformer = new LessTransformer();
+            var transformer = new LessTransformer(context.EnableOptimizations, context.EnableInstrumentation);
             IEnumerable<FileInfo> files = bundle.Files.Select(f => new FileInfo(context.HttpContext.Server.MapPath(f.VirtualFile.VirtualPath)));
 
             SourceTransformation sourceTransform = transformer.Transform(files);
