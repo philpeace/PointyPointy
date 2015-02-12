@@ -106,11 +106,10 @@ namespace CodePeace.Common.Web.Bundling
 
         public IPathResolver GetPathResolver(Parser lessParser)
         {
-            if (fileReader == null || !(fileReader.PathResolver is ImportedFilePathResolver))
-            {
-                fileReader = new FileReader(new ImportedFilePathResolver(currentFilePath));
-                importer.FileReader = fileReader;
-            }
+            var importer = lessParser.Importer as Importer;
+            var fileReader = importer.FileReader as FileReader;
+
+            return fileReader.PathResolver;
         }
     }
 }

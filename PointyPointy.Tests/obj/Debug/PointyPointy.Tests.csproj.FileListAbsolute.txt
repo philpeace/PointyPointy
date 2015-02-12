@@ -110,3 +110,4 @@ D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\PointyPointy.Services.pdb
 =======
 C:\projects\PointyPointy\PointyPointy.Tests\bin\Debug\dotless.Core.dll
 >>>>>>> origin/master
+D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\dotless.Core.dll
