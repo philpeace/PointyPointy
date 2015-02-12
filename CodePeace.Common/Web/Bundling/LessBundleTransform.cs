@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -23,19 +24,19 @@ namespace CodePeace.Common.Web.Bundling
 
             context.HttpContext.Response.Cache.SetLastModifiedFromFileDependencies();
 
-            var transformer = new LessTransformer();
-            var files = bundle.Files.Select(f => new FileInfo(context.HttpContext.Server.MapPath(f.VirtualFile.VirtualPath)));
+            var transformer = new LessTransformer(context.EnableOptimizations, context.EnableInstrumentation);
+            IEnumerable<FileInfo> files = bundle.Files.Select(f => new FileInfo(context.HttpContext.Server.MapPath(f.VirtualFile.VirtualPath)));
 
-            var sourceTransform = transformer.Transform(files);
+            SourceTransformation sourceTransform = transformer.Transform(files);
 
             if (BundleTable.EnableOptimizations)
             {
-                var basePath = context.HttpContext.Server.MapPath("~/");
+                string basePath = context.HttpContext.Server.MapPath("~/");
 
                 bundle.Files = sourceTransform.Dependencies.Distinct().Select(f => BuildBundleFile(f, basePath));
             }
 
-            foreach (var file in sourceTransform.Dependencies)
+            foreach (FileInfo file in sourceTransform.Dependencies)
             {
                 context.HttpContext.Response.AddFileDependency(file.FullName);
             }
@@ -46,9 +47,9 @@ namespace CodePeace.Common.Web.Bundling
 
         private static BundleFile BuildBundleFile(FileInfo f, string basePath)
         {
-            var virtualPath = string.Format("~/{0}", f.FullName.Substring(basePath.Length));
-            var virtualFile = HostingEnvironment.VirtualPathProvider.GetFile(virtualPath);
-            var includedVirtualPath = VirtualPathUtility.ToAppRelative(virtualPath);
+            string virtualPath = string.Format("~/{0}", f.FullName.Substring(basePath.Length));
+            VirtualFile virtualFile = HostingEnvironment.VirtualPathProvider.GetFile(virtualPath);
+            string includedVirtualPath = VirtualPathUtility.ToAppRelative(virtualPath);
 
             return new BundleFile(includedVirtualPath, virtualFile);
         }

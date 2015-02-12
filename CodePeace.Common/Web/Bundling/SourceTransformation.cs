@@ -10,4 +10,3 @@ namespace CodePeace.Common.Web.Bundling
         public IEnumerable<FileInfo> Dependencies { get; set; }
     }
 }
-

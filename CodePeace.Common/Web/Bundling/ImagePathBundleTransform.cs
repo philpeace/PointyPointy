@@ -19,10 +19,10 @@ namespace CodePeace.Common.Web.Bundling
 
             var fromUri = new Uri(context.HttpContext.Server.MapPath("~/"));
             var toUri = new Uri(context.HttpContext.Server.MapPath(context.BundleVirtualPath));
-            var relativeUri = fromUri.MakeRelativeUri(toUri);
+            Uri relativeUri = fromUri.MakeRelativeUri(toUri);
 
-            var imageUrlRoot = string.Format("{0}/{1}", context.HttpContext.Request.ApplicationPath, relativeUri);
-                
+            string imageUrlRoot = string.Format("{0}/{1}", context.HttpContext.Request.ApplicationPath, relativeUri);
+
             response.Content = response.Content.Replace("url(images", "url(" + imageUrlRoot + "/images");
         }
     }
