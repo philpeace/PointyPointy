@@ -20,6 +20,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointyPointy.Data", "Pointy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PointyPointy.Services", "PointyPointy.Services\PointyPointy.Services.csproj", "{49E3F9D3-7EE7-4D61-8180-CD8C2E8EC731}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E00382F6-7333-492A-BDDB-88D4BDAF6E85}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		WebEssentials-Settings.json = WebEssentials-Settings.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
