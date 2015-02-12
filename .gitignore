@@ -195,3 +195,7 @@ PointyPointy/Config/Auth.config
 =======
 *.cache
 >>>>>>> origin/master
+*.dll
+*.pdb
+*.pdb
+*.suo
