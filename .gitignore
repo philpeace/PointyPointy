@@ -185,3 +185,9 @@ FakesAssemblies/
 
 PointyPointy/Config/Auth.config
 
+*.dll
+*.cache
+*.pdb
+*.suo
+*.mdf
+*.ldf
