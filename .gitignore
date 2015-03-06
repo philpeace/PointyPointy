@@ -191,3 +191,6 @@ PointyPointy/Config/Auth.config
 *.suo
 *.mdf
 *.ldf
+*.mdf
+PointyPointy/App_Data/aspnet-PointyPointy-20150126090010_log.ldf
+*.mdf
