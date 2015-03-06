@@ -1,3 +1,6 @@
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\xunit.runner.utility.desktop.dll
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\xunit.abstractions.dll
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll.config
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.dll
 D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\PointyPointy.Data.pdb
@@ -18,6 +21,8 @@ D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migration
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUseraddemail.resources
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersScrumInviteremoveal.resources
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.ScrumInviteUsersMapping.resources
+D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.Migrations.NewScrumInviteChanges.resources
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.csproj.GenerateResource.Cache
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.dll
 D:\Projects\PointyPointy\PointyPointy.Data\obj\Debug\PointyPointy.Data.pdb
+D:\Projects\PointyPointy\PointyPointy.Data\bin\Debug\dotless.Core.pdb

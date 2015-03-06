@@ -68,6 +68,9 @@ C:\projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.pdb
 C:\projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.dll
 C:\projects\PointyPointy\PointyPointy\bin\PointyPointy.Data.pdb
 C:\projects\PointyPointy\PointyPointy\bin\dotless.Core.dll
+D:\Projects\PointyPointy\PointyPointy\bin\xunit.runner.visualstudio.testadapter.dll
+D:\Projects\PointyPointy\PointyPointy\bin\xunit.runner.utility.desktop.dll
+D:\Projects\PointyPointy\PointyPointy\bin\xunit.abstractions.dll
 D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.dll.config
 D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.dll
 D:\Projects\PointyPointy\PointyPointy\bin\PointyPointy.pdb
@@ -138,3 +141,8 @@ D:\Projects\PointyPointy\PointyPointy\bin\Microsoft.Owin.Security.MicrosoftAccou
 D:\Projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.csprojResolveAssemblyReference.cache
 D:\Projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.dll
 D:\Projects\PointyPointy\PointyPointy\obj\Debug\PointyPointy.pdb
+D:\Projects\PointyPointy\PointyPointy\bin\Hangfire.Core.dll
+D:\Projects\PointyPointy\PointyPointy\bin\Hangfire.SqlServer.dll
+D:\Projects\PointyPointy\PointyPointy\bin\Hangfire.Core.xml
+D:\Projects\PointyPointy\PointyPointy\bin\Hangfire.SqlServer.xml
+D:\Projects\PointyPointy\PointyPointy\bin\dotless.Core.pdb

@@ -26,12 +26,36 @@ namespace PointyPointy.Controllers
             return View(vm);
         }
 
+        // GET: Invite/Create
+        [Authorize]
+        public ActionResult Create()
+        {
+            var vm = new InviteCreateViewModel();
+
+            return View(vm);
+        }
+
         // POST: Invite/Create
         [HttpPost]
         [Authorize]
-        public ActionResult Create(InviteCreateViewModel vm)
+        [ActionName("Create")]
+        public ActionResult CreatePOST(InviteCreateViewModel vm)
         {
-            _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+            var invites = vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            var invite = _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, invites);
+
+            return RedirectToAction("Created", new { id = invite.Id });
+        }
+
+        public ActionResult Created(InviteCreatedViewModel vm)
+        {
+            var invite = _scrumInviteService.GetById(vm.Id);
+
+            if (invite.UserId != vm.User.Id)
+            {
+                return new HttpUnauthorizedResult();
+            }
 
             return View(vm);
         }
@@ -39,8 +63,6 @@ namespace PointyPointy.Controllers
         // GET: Invite/Respond
         public ActionResult Respond(InviteRespondViewModel vm)
         {
-            
-
             return View(vm);
         }
 

@@ -1,3 +1,20 @@
 ﻿@model PointyPointy.ViewModels.InviteCreateViewModel
 
-<h2>title</h2>
+<h1>Lets get started!</h1>
+
+<p class="lead">We'll need a list of the people who you want to take part in the scrum. We will email them to ask them to register and then you can start pointing.</p>
+<p class="small text-muted">Don't worry, we won't bombard them with emails or anything like that, in fact if they register through a thrid party then we won't even know their password.</p>
+
+@using (Html.BeginForm("Create", "Invite"))
+{
+    <fieldset>
+        <legend>Invite some people</legend>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Invitees, new { @class = "sr-only" })
+            <textarea id="Invitees" class="form-control"></textarea>
+            <p class="help-block">Put each email address on a separate line.</p>
+        </div>
+
+        <button type="submit" class="btn btn-primary"><i class="fa fa-user-plus"></i> Invite</button>
+    </fieldset>
+}

@@ -1,0 +1,15 @@
+﻿@model PointyPointy.ViewModels.InviteCreateViewModel
+
+<h2>Invite</h2>
+
+@using (Html.BeginForm("Create", "Invite"))
+{
+    <fieldset>
+        <legend>Invite some people</legend>
+
+        @Html.LabelFor(m => m.Invitees)
+        @Html.TextAreaFor(m => m.Invitees)
+
+        <button type="submit">Invite</button>
+    </fieldset>
+}

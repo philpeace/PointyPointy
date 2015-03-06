@@ -52,8 +52,8 @@ namespace PointyPointy.Services
                 Subject = "Security Code",
                 BodyFormat = "Your security code is {0}"
             });
-            manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            manager.EmailService = new IdentityMessageEmailService();
+            manager.SmsService = new IdentityMessageSmsService();
             IDataProtectionProvider dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

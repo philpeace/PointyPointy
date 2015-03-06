@@ -13,6 +13,9 @@ C:\projects\PointyPointy\CodePeace.Common\bin\Debug\WebGrease.dll
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Antlr3.Runtime.pdb
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\Newtonsoft.Json.xml
 C:\projects\PointyPointy\CodePeace.Common\bin\Debug\System.Web.Optimization.xml
+D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\xunit.runner.utility.desktop.dll
+D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\xunit.abstractions.dll
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.dll.config
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.dll
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\CodePeace.Common.pdb
@@ -25,5 +28,7 @@ D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\WebGrease.dll
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\Antlr3.Runtime.pdb
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\Newtonsoft.Json.xml
 D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\System.Web.Optimization.xml
+D:\Projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.csprojResolveAssemblyReference.cache
 D:\Projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.dll
 D:\Projects\PointyPointy\CodePeace.Common\obj\Debug\CodePeace.Common.pdb
+D:\Projects\PointyPointy\CodePeace.Common\bin\Debug\dotless.Core.pdb

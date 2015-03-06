@@ -10,5 +10,7 @@ namespace PointyPointy.Services
         ScrumInviteUser GetInviteUserForKey(string key, string email);
 
         ScrumInviteUser Respond(int id, string email, bool accept);
+
+        ScrumInvite GetById(int id);
     }
 }

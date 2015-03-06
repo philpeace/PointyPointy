@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Reflection;
+using System.Linq;
 using System.Web.Mvc;
 using Autofac;
 using Autofac.Core;
@@ -18,7 +19,8 @@ namespace PointyPointy
     {
         public static IContainer BuildContainer(ContainerBuilder builder)
         {
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var assemblies = System.Web.Compilation.BuildManager.GetReferencedAssemblies().Cast<Assembly>().ToArray();
+            //Assembly[] assembliess = AppDomain.CurrentDomain.GetAssemblies();
 
             builder.RegisterModule<AutofacWebTypesModule>();
             builder.RegisterType<ExtensibleActionInvoker>().As<IActionInvoker>();
@@ -26,7 +28,8 @@ namespace PointyPointy
 
             builder.RegisterAssemblyTypes(assemblies)
                 .Where(t => typeof (IDependency).IsAssignableFrom(t))
-                .AsImplementedInterfaces();
+                .AsImplementedInterfaces()
+                .InstancePerDependency();
 
             builder.RegisterType<PointyContext>().As<IDAOContext>()
                 .InstancePerLifetimeScope();
@@ -40,12 +43,12 @@ namespace PointyPointy
             builder.RegisterType<GenericRepository<ScrumInvite>>().As<IRepository<ScrumInvite>>()
                    .WithParameter(new ResolvedParameter(
                         (p, c) => p.ParameterType == typeof(IDbContext),
-                        (p, c) => DependencyResolver.Current.GetService<IPointyContext>()));
+                        (p, c) => DependencyResolver.Current.GetService<IPointyContext>())).InstancePerRequest();
 
             builder.RegisterType<GenericRepository<ScrumInviteUser>>().As<IRepository<ScrumInviteUser>>()
                    .WithParameter(new ResolvedParameter(
                         (p, c) => p.ParameterType == typeof(IDbContext),
-                        (p, c) => DependencyResolver.Current.GetService<IPointyContext>()));
+                        (p, c) => DependencyResolver.Current.GetService<IPointyContext>())).InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             builder.RegisterControllers(assemblies).InjectActionInvoker();

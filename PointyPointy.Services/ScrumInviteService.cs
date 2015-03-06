@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using PointyPointy.Data;
 using PointyPointy.Data.Entities;
+using CodePeace.Common.Extensions;
 
 namespace PointyPointy.Services
 {
@@ -24,7 +25,9 @@ namespace PointyPointy.Services
 
                 foreach (var user in users)
                 {
-                    _scrumInviteUserRepository.Create(new ScrumInviteUser { Invite = invite, Email = user });
+                    var inviteKey = string.Format("{0}-{1}-{2}", invite.Id, email, DateTime.Now.Ticks).ToSha256();
+
+                    _scrumInviteUserRepository.Create(new ScrumInviteUser { Invite = invite, Email = user, RequestKey = inviteKey });
                 }
 
                 return invite;
@@ -48,6 +51,11 @@ namespace PointyPointy.Services
             invite = _scrumInviteUserRepository.Update(invite);
 
             return invite;
+        }
+
+        public ScrumInvite GetById(int id)
+        {
+            return _scrumInviteRepository.Get(id);
         }
     }
 }
