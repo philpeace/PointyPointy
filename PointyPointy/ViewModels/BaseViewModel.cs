@@ -1,4 +1,4 @@
-﻿using PointyPointy.Models;
+﻿using PointyPointy.Services.BuiltIn.Models;
 
 namespace PointyPointy.ViewModels
 {

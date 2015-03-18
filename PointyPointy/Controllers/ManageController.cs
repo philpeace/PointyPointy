@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PointyPointy.Models;
 using PointyPointy.Services;
+using PointyPointy.Services.BuiltIn;
+using PointyPointy.Services.BuiltIn.Models;
 
 namespace PointyPointy.Controllers
 {

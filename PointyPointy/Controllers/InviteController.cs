@@ -41,13 +41,21 @@ namespace PointyPointy.Controllers
         [ActionName("Create")]
         public ActionResult CreatePOST(InviteCreateViewModel vm)
         {
-            var invites = vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            var invitees = vm.Invitees.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            var invite = _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, invites);
+            if (invitees.Length == 0)
+            {
+                ModelState.AddModelError("Invitees", "You need at least one email address to invite.");
+
+                return View(vm);
+            }
+
+            var invite = _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, invitees);
 
             return RedirectToAction("Created", new { id = invite.Id });
         }
 
+        [Authorize]
         public ActionResult Created(InviteCreatedViewModel vm)
         {
             var invite = _scrumInviteService.GetById(vm.Id);
@@ -63,15 +71,16 @@ namespace PointyPointy.Controllers
         // GET: Invite/Respond
         public ActionResult Respond(InviteRespondViewModel vm)
         {
+            vm.InviteUser = _scrumInviteService.GetInviteUserForKey(vm.Key, vm.Email);
+
             return View(vm);
         }
 
         // POST: Invite/Response
         [HttpPost]
-        [Authorize]
         public ActionResult Respond(InviteResponseViewModel vm)
         {
-            vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Accept);
+            vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Key, vm.Accept);
 
             return View(vm);
         }

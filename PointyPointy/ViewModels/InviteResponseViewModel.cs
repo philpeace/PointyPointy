@@ -10,6 +10,8 @@ namespace PointyPointy.ViewModels
 
         public bool Accept { get; set; }
 
+        public string Key { get; set; }
+
         public ScrumInviteUser InviteUser { get; set; }
     }
 }

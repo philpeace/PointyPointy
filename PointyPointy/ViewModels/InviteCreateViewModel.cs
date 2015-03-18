@@ -1,4 +1,5 @@
-﻿namespace PointyPointy.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+namespace PointyPointy.ViewModels
 {
     public class InviteCreateViewModel : InviteViewModel
     {

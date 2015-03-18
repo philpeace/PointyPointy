@@ -10,11 +10,13 @@ namespace PointyPointy.Services
     {
         private readonly IRepository<ScrumInvite> _scrumInviteRepository;
         private readonly IRepository<ScrumInviteUser> _scrumInviteUserRepository;
+        private readonly IInvitationService _invitationService;
 
-        public ScrumInviteService(IRepository<ScrumInvite> scrumInviteRepository, IRepository<ScrumInviteUser> scrumInviteUserRepository)
+        public ScrumInviteService(IRepository<ScrumInvite> scrumInviteRepository, IRepository<ScrumInviteUser> scrumInviteUserRepository, IInvitationService invitationService)
         {
             _scrumInviteRepository = scrumInviteRepository;
             _scrumInviteUserRepository = scrumInviteUserRepository;
+            _invitationService = invitationService;
         }
 
         public ScrumInvite CreateInviteForUsers(string userId, string email, string[] users)
@@ -27,7 +29,10 @@ namespace PointyPointy.Services
                 {
                     var inviteKey = string.Format("{0}-{1}-{2}", invite.Id, email, DateTime.Now.Ticks).ToSha256();
 
-                    _scrumInviteUserRepository.Create(new ScrumInviteUser { Invite = invite, Email = user, RequestKey = inviteKey });
+                    var newUser = _scrumInviteUserRepository.Create(new ScrumInviteUser { Invite = invite, Email = user, RequestKey = inviteKey });
+                    invite.Users.Add(newUser);
+
+                    _invitationService.SendInvite(newUser);
                 }
 
                 return invite;
@@ -41,9 +46,14 @@ namespace PointyPointy.Services
             return _scrumInviteUserRepository.Fetch(i => i.RequestKey == key && i.Email == email).FirstOrDefault();
         }
 
-        public ScrumInviteUser Respond(int id, string email, bool accept)
+        public ScrumInviteUser Respond(int id, string email, string key, bool accept)
         {
-            var invite = _scrumInviteUserRepository.Get(i => i.Invite.Id == id && i.Email == email);
+            var invite = _scrumInviteUserRepository.Get(i => i.Invite.Id == id && i.Email == email && i.RequestKey == key);
+
+            if (invite == null)
+            {
+                return invite;
+            }
 
             invite.Accepted = accept;
             invite.Responded = DateTime.Now;

@@ -15,7 +15,7 @@ namespace PointyPointy.Tests.Services
             var inviteRepo = new Mock<IRepository<ScrumInvite>>();
             var inviteUserRepo = new Mock<IRepository<ScrumInviteUser>>();
 
-            var target = new ScrumInviteService(inviteRepo.Object, inviteUserRepo.Object);
+            var target = new ScrumInviteService(inviteRepo.Object, inviteUserRepo.Object, null);
 
             Assert.NotNull(target);
         }

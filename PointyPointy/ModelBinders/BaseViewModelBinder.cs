@@ -1,8 +1,8 @@
 ﻿using System.Web.Mvc;
 using Autofac.Integration.Mvc;
 using Microsoft.AspNet.Identity;
-using PointyPointy.Services;
 using PointyPointy.ViewModels;
+using PointyPointy.Services.BuiltIn;
 
 namespace PointyPointy.ModelBinders
 {
