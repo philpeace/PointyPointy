@@ -70,3 +70,7 @@ D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Hangfire.SqlServer.dll
 D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\dotless.Core.pdb
 D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Hangfire.Core.xml
 D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Hangfire.SqlServer.xml
+D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.dll
+D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Microsoft.Owin.Security.Facebook.xml
+D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Microsoft.Owin.Security.Twitter.dll
+D:\Projects\PointyPointy\PointyPointy.Tests\bin\Debug\Microsoft.Owin.Security.Twitter.xml

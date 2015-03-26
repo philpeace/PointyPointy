@@ -79,6 +79,7 @@
     <Compile Include="ITransientDependency.cs" />
     <Compile Include="IUnitOfWorkDependency.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceResponse.cs" />
     <Compile Include="Web\Bundling\AsIsBundleOrderer.cs" />
     <Compile Include="Web\Bundling\BundlingExtensions.cs" />
     <Compile Include="Web\Bundling\ILessTransformer.cs" />

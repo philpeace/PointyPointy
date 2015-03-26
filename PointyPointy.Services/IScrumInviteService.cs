@@ -1,16 +1,17 @@
 ﻿using CodePeace.Common;
 using PointyPointy.Data.Entities;
+using PointyPointy.Services.BuiltIn.Models;
 
 namespace PointyPointy.Services
 {
     public interface IScrumInviteService : IDependency
     {
-        ScrumInvite CreateInviteForUsers(string userId, string email, string[] users);
+        ServiceResponse<ScrumInvite> CreateInviteForUsers(ApplicationUser invitee, string[] users);
 
-        ScrumInviteUser GetInviteUserForKey(string key, string email);
+        ServiceResponse<ScrumInviteUser> GetInviteUserForKey(string key, string email);
 
-        ScrumInviteUser Respond(int id, string email, string key, bool accept);
+        ServiceResponse<ScrumInviteUser> Respond(int id, string email, string key, bool accept);
 
-        ScrumInvite GetById(int id);
+        ServiceResponse<ScrumInvite> GetById(int id);
     }
 }

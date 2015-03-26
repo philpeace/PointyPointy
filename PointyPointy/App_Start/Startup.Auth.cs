@@ -49,16 +49,22 @@ namespace PointyPointy
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //    clientId: "000000004014F41B",
+            //    clientSecret: "WQnzOzcy4yuW8dAwabW9sxVy9jHQBKPq");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            string twitterClientId = ConfigurationManager.AppSettings["auth.twitter.clientid"];
+            string twitterClientSecret = ConfigurationManager.AppSettings["auth.twitter.clientsecret"];
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: twitterClientId,
+               consumerSecret: twitterClientSecret);
+
+            string facebookClientId = ConfigurationManager.AppSettings["auth.facebook.clientid"];
+            string facebookClientSecret = ConfigurationManager.AppSettings["auth.facebook.clientsecret"];
+
+            app.UseFacebookAuthentication(
+               appId: facebookClientId,
+               appSecret: facebookClientSecret);
 
             string googleClientId = ConfigurationManager.AppSettings["auth.google.clientid"];
             string googleClientSecret = ConfigurationManager.AppSettings["auth.google.clientsecret"];

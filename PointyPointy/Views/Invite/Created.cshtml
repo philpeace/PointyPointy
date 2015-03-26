@@ -1,15 +1,12 @@
-﻿@model PointyPointy.ViewModels.InviteCreateViewModel
+﻿@model PointyPointy.ViewModels.InviteCreatedViewModel
 
-<h2>Invite</h2>
+<h2>Invitation sent</h2>
 
-@using (Html.BeginForm("Create", "Invite"))
-{
-    <fieldset>
-        <legend>Invite some people</legend>
+<p>Invitations sent to:</p>
 
-        @Html.LabelFor(m => m.Invitees)
-        @Html.TextAreaFor(m => m.Invitees)
-
-        <button type="submit">Invite</button>
-    </fieldset>
-}
+<ul>
+    @foreach (var i in Model.ScrumInvite.Users)
+    {
+        <li>@i.Email</li>
+    }
+</ul>

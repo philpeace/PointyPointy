@@ -47,20 +47,27 @@ namespace PointyPointy.Controllers
             {
                 ModelState.AddModelError("Invitees", "You need at least one email address to invite.");
 
-                return View(vm);
+                return View("Create", vm);
             }
 
-            var invite = _scrumInviteService.CreateInviteForUsers(vm.User.Id, vm.User.Email, invitees);
+            var inviteResponse = _scrumInviteService.CreateInviteForUsers(vm.User, invitees);
 
-            return RedirectToAction("Created", new { id = invite.Id });
+            if (!inviteResponse.Success)
+            {
+                ModelState.AddModelError("Invitees", "Well that's embarrassing, something went wrong.");
+
+                return View("Create", vm);
+            }
+
+            return RedirectToAction("Created", new { id = inviteResponse.Response.Id });
         }
 
         [Authorize]
         public ActionResult Created(InviteCreatedViewModel vm)
         {
-            var invite = _scrumInviteService.GetById(vm.Id);
+            var inviteResponse = _scrumInviteService.GetById(vm.Id);
 
-            if (invite.UserId != vm.User.Id)
+            if (inviteResponse.Response.UserId != vm.User.Id)
             {
                 return new HttpUnauthorizedResult();
             }
@@ -71,7 +78,8 @@ namespace PointyPointy.Controllers
         // GET: Invite/Respond
         public ActionResult Respond(InviteRespondViewModel vm)
         {
-            vm.InviteUser = _scrumInviteService.GetInviteUserForKey(vm.Key, vm.Email);
+            /// TODO: Handle Response.Success == false
+            vm.InviteUser = _scrumInviteService.GetInviteUserForKey(vm.Key, vm.Email).Response;
 
             return View(vm);
         }
@@ -80,7 +88,8 @@ namespace PointyPointy.Controllers
         [HttpPost]
         public ActionResult Respond(InviteResponseViewModel vm)
         {
-            vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Key, vm.Accept);
+            /// TODO: Handle Response.Success == false
+            vm.InviteUser = _scrumInviteService.Respond(vm.Id, vm.Email, vm.Key, vm.Accept).Response;
 
             return View(vm);
         }
