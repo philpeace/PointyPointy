@@ -10,6 +10,7 @@
 {
     <h4>Login</h4>
     <p class="text-lead">We don't need to know your password, and let's face it, the fewer passwords you need to remember the better.</p>
+    <p>So, if you have an account with any of them, you know what to do.</p>
     using (Html.BeginForm("ExternalLogin", "Account", new { Model.ReturnUrl }))
     {
         @Html.AntiForgeryToken()
@@ -17,8 +18,11 @@
             <p>
                 @foreach (var p in loginProviders)
                 {
-                    <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
-                        <i class="fa fa-@p.AuthenticationType.ToLowerInvariant()"></i>
+                    var providerIconClass = "fa-" + p.AuthenticationType.ToLowerInvariant();
+                    var providerClass = "prov-" + p.AuthenticationType.ToLowerInvariant();
+
+                   <button type="submit" class="btn btn-default @providerClass" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">
+                        <i class="fa @providerIconClass"></i>
                         @p.AuthenticationType
                     </button>
                 }

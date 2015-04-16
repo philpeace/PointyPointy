@@ -198,3 +198,5 @@ PointyPointy/App_Data/aspnet-PointyPointy-20150126090010_log.ldf
 *.ldf
 *.mdf
 PointyPointy/App_Data/aspnet-PointyPointy-20150126090010_log.ldf
+*.mdf
+*.suo
